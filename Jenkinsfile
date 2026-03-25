@@ -2,16 +2,16 @@ pipeline {
     agent any
 
     stages {
-        stage('Docker Compose Test') {
+        stage('Build Image') {
             steps {
-                sh 'docker compose up --build --abort-on-container-exit'
+                sh 'docker build -t devops-app .'
             }
         }
-    }
 
-    post {
-        always {
-            sh 'docker compose down || true'
+        stage('Run Tests') {
+            steps {
+                sh 'docker run --rm devops-app npm test'
+            }
         }
     }
 }
