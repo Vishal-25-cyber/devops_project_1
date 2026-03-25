@@ -8,4 +8,4 @@ services:
 
   test:
     build: .
-    command: npm test
+    command: npm testls -l /usr/bin/docker-compose
